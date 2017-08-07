@@ -150,7 +150,7 @@ WWW.METALLICA.COM</textarea>
             barcode: barcode_val
         };
 
-        $.post('/tinkerbell/lib/generate-barcode.php', data, function(response){
+        $.post('lib/generate-barcode.php', data, function(response){
 
             var new_src = "data:image/png;base64, " + response;
 
@@ -186,8 +186,8 @@ WWW.METALLICA.COM</textarea>
 
         /*var w = window.open();
         $(w.document.body).html(html_content);*/
-        $.post('/tinkerbell/lib/submit-generate-one.php', data, function(response){
-            window.open("/tinkerbell/lib/view-tm-ticket.php?filename=" + response);
+        $.post('lib/submit-generate-one.php', data, function(response){
+            window.open("lib/view-tm-ticket.php?filename=" + response);
 
             $('.generate-btn').html("Generate");
             $('.generate-btn').attr("disabled", false);

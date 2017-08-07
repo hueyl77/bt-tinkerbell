@@ -164,7 +164,7 @@
     <div id="barcode-wrap1" class="barcode-wrap rotate-90"
         style="right: 78px; top: 60px; width: 175px;">
 
-        <img id="barcode_img" style="max-width: 100%; min-height: 40px;" alt="barcode" />
+        <img id="barcode_img" style="max-width: 100%; height: 35px;" alt="barcode" />
             <br/>
         <span class="barcode_display">[BARCODE]</span>
     </div>

@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/pdfcrowd.php';
 
 session_start();
@@ -11,7 +11,7 @@ if (!isset($no_login) || !$no_login) {
 }
 
 
-$dotenv = new Dotenv\Dotenv(__DIR__ . '/../../');
+$dotenv = new Dotenv\Dotenv(__DIR__ . '/../');
 $dotenv->load();
 
 // global constants
