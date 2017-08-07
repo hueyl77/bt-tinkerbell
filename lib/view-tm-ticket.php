@@ -2,7 +2,7 @@
 require_once('./globals.php');
 
 $filename = _getVar($_REQUEST, 'filename');
-$path = storage_path('/pdfs/' . $filename);
+$path = storage_path('pdfs/' . $filename);
 
 if (!file_exists($path)) {
     die("File not found");

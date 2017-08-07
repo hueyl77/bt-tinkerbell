@@ -122,11 +122,11 @@
             <br/>
             <br/>
             <span class="section_display">[SECT]</span><br/>
-            <br/>
+            <span class="cc_code_display">[CC_CODE]</span><br/>
             <span class="row_display">[ROW]</span>
             &nbsp;&nbsp;
             <span class="seat_display">[SEAT]</span><br/>
-            <br/>
+            <span class="zip_code_display">[ZIP_CODE]</span><br/>
             <span class="ticket_date_display">[TICKET_DATE]</span>
     </div>
 
@@ -164,7 +164,7 @@
     <div id="barcode-wrap1" class="barcode-wrap rotate-90"
         style="right: 78px; top: 60px; width: 175px;">
 
-        <img id="barcode_img" style="max-width: 100%; height: 35px;" alt="barcode" />
+        <img id="barcode_img" style="max-width: 100%; height: 33px;" alt="barcode" />
             <br/>
         <span class="barcode_display">[BARCODE]</span>
     </div>
@@ -187,10 +187,15 @@
     </tr>
     <tr>
         <td valign="top" style="padding-right: 10px; padding-top: 10px;">
-            <img src="https://s3.amazonaws.com/tinkerbell-assets/tm-disclaimer-block.png" style="width: 100%;">
-            <br/>
+            <div style="position: relative;">
+                <img src="https://s3.amazonaws.com/tinkerbell-assets/tm-disclaimer-block.png" style="width: 100%;">
+                <br/>
 
-            <img src="https://s3.amazonaws.com/tinkerbell-assets/tm-thankyou-ticketfast.png" style="width: 100%; margin-top: 5px;">
+                <img src="https://s3.amazonaws.com/tinkerbell-assets/tm-thankyou-ticketfast.png" style="width: 100%; margin-top: 5px;">
+
+                <div id="pdf_comment" style="color: #fff; position: absolute;">
+                </div>
+            </div>
         </td>
         <td valign="top" style="padding-left: 10px; padding-top: 10px;">
             <img src="https://s3.amazonaws.com/tinkerbell-assets/tm-promo-2for1.png" style="width: 100%;"><br/>

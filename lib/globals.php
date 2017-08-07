@@ -30,6 +30,13 @@ function storage_path($folder) {
   return __DIR__ . "/../storage/$folder";
 }
 
+function scrubFilename($filename) {
+    $filename = preg_replace("/[\s_]/", "-", $filename);
+    $filename = preg_replace('/[^0-9a-zA-Z-_.]/', '', $filename);
+
+    return $filename;
+}
+
 function generatePdf($content, $ticket_info)
 {
     // create an API client instance
@@ -71,15 +78,16 @@ function generatePdf($content, $ticket_info)
         $ticket_info['event_name'] = $ticket_info['event_id'];
     }
 
-    $filename = sprintf('%s_%s_%s_%s.pdf',
-        substr($ticket_info['event_name'], 0, 10),
+    $event_name = scrubFilename($ticket_info['event_name']);
+    $filename = sprintf('%s-%s_%s_%s_%s.pdf',
+        $ticket_info['event_id'],
+        substr($event_name, 0, 10),
         $ticket_info['section'],
         $ticket_info['row'],
         $ticket_info['seat']
     );
 
-    $file_name = preg_replace( '/[^a-z0-9 .-]+/', '-', strtolower($filename));
-
+    $filename = scrubFilename($filename);
     $filepath = "$current_year/$current_month/" . $filename;
     file_put_contents($pdfs_directory_path . "/"  . $filepath, $pdf);
 

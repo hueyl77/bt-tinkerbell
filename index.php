@@ -29,16 +29,10 @@
                         <input class="form-control" type="password" name="password" placeholder="password" />
                     </div>
                     <br>
-                    <a href="javascript:loginSubmit()" class="btn btn-dark btn-lg">Login</a>
+                    <input type="submit" class="btn btn-dark btn-lg" />
                 </form>
             </div>
         </div>
     </header>
-
-    <script type="text/javascript">
-    function loginSubmit() {
-        document.loginForm.submit();
-    }
-    </script>
     </body>
 </html>

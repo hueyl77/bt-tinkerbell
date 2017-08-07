@@ -10,6 +10,7 @@ $html = $content;
 try
 {
     $ticket_info = [];
+    $ticket_info['event_id'] = $event_id;
     $ticket_info['event_name'] = _getVar($_REQUEST, 'event_name') or $event_id;
     $ticket_info['section'] = _getVar($_REQUEST, 'section');
     $ticket_info['row'] = _getVar($_REQUEST, 'row');

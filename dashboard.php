@@ -4,6 +4,8 @@
     $random_order_number = randomNumber(2) . "-" . randomNumber(4);
     $random_event_id = "S" . strtoupper(randomLetters(1)) . randomNumber(4);
     $ticket_date = strtoupper(getTicketDate());
+    $random_zip_code = "ZIP" . randomNumber(4);
+    $random_cc_code = "VI " . rand(1, 399) . "X";
 
     function randomLetters($num_chars) {
         $letters = "";
@@ -31,6 +33,16 @@ include 'header.php';
     .sm-field {
         width: 50px;
     }
+
+    .ticket-info-tbl td {
+        min-width: 120px;
+    }
+
+    @media (max-width: 768px) {
+        .ticket-info-tbl td {
+            display: block;
+        }
+    }
 </style>
 
 <div class="container">
@@ -41,7 +53,7 @@ include 'header.php';
 <form class="form-vertical" role="form" method="POST" action="#">
 
 <div class="well well-lg">
-    <table class="table">
+    <table class="table ticket-info-tbl">
         <tr>
             <td>NAME:</td>
             <td style="width: 250px;"><input id="customer_name" value="Sam Cohen"
@@ -59,6 +71,14 @@ include 'header.php';
 
             <td>BARCODE:</td>
             <td colspan="5"><input id="barcode" style="width: 100%" value="" /></td>
+        </tr>
+
+        <tr>
+            <td>ZIP_CODE:</td>
+            <td><input id="zip_code" style="width: 100%" value="<?php echo $random_zip_code; ?>" /></td>
+
+            <td>CREDIT CARD:</td>
+            <td colspan="5"><input id="cc_code" style="width: 100%" value="<?php echo $random_cc_code; ?>" /></td>
         </tr>
 
         <tr>
@@ -123,7 +143,21 @@ WWW.METALLICA.COM</textarea>
             value = value.replace(/\r\n|\r|\n/g,"<br />");
 
             $('.' + display_class).html(value);
+            updatePdfComment();
         });
+    }
+
+    function updatePdfComment() {
+        var barcode_val = $('#barcode').val();
+        var section = $('#section').val();
+        var row = $('#row').val();
+        var seat = $('#seat').val();
+
+        var comment_str = 'PDFCOMMENT{"source":"ticketfire","section":"' +
+            section +'","row":"' + row + '","seat":"' + seat +
+            '","barcode":"' + barcode_val + '"}';
+
+        $('#pdf_comment').text(comment_str);
     }
 
     bindField('customer_name',  'customer_name_display');
@@ -133,8 +167,9 @@ WWW.METALLICA.COM</textarea>
     bindField('seat_notes',     'seat_notes_display')
 
     bindField('order_number',   'order_number_display');
-    //bindField('barcode',        'barcode_display');
     bindField('ticket_date',    'ticket_date_display');
+    bindField('cc_code',        'cc_code_display');
+    bindField('zip_code',        'zip_code_display');
 
     bindField('event_name',     'event_name_display');
     bindField('event_id',       'event_id_display');
@@ -167,6 +202,7 @@ WWW.METALLICA.COM</textarea>
             }
 
             $('.barcode_display').html(barcode_val_spaced);
+            updatePdfComment();
         });
     });
 
@@ -180,6 +216,8 @@ WWW.METALLICA.COM</textarea>
           seat: $('#seat').val(),
           pdf_content: html_content
         };
+
+        updatePdfComment();
 
         $(this).attr("disabled",true);
         $(this).html("Working...");
