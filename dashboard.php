@@ -1,28 +1,11 @@
 <?php
     require_once('lib/globals.php');
 
-    $random_order_number = randomNumber(2) . "-" . randomNumber(4);
+    $random_order_number = generateOrderNumber();
     $random_event_id = "S" . strtoupper(randomLetters(1)) . randomNumber(4);
-    $ticket_date = strtoupper(getTicketDate());
-    $random_zip_code = "ZIP" . randomNumber(4);
-    $random_cc_code = "VI " . rand(1, 399) . "X";
-
-    function randomLetters($num_chars) {
-        $letters = "";
-        for($i=0; $i<$num_chars; $i++) {
-            $letters .= chr(64+rand(0,26));
-        }
-
-        return $letters;
-    }
-
-    function randomNumber($digits) {
-        return rand(pow(10, $digits-1), pow(10, $digits)-1);
-    }
-
-    function getTicketDate() {
-        return date('dMy');
-    }
+    $ticket_date = getTicketDate();
+    $random_zip_code = generateZipCode();
+    $random_cc_code = generateCcCode();
 ?>
 
 <?php
@@ -34,8 +17,8 @@ include 'header.php';
         width: 50px;
     }
 
-    .ticket-info-tbl td {
-        min-width: 120px;
+    .highlighted-field {
+        border: 2px dashed red;
     }
 
     @media (max-width: 768px) {
@@ -50,71 +33,82 @@ include 'header.php';
         <div class="col-sm-12 main">
 
 <h1 class="page-header" style="margin-bottom: 0;">Generate One</h1>
-<form class="form-vertical" role="form" method="POST" action="#">
+<form name="ticketform" class="form-vertical" role="form" method="POST" action="#">
 
-<div class="well well-lg">
+<div class="well well-lg" style="position: relative;">
     <table class="table ticket-info-tbl">
         <tr>
             <td>NAME:</td>
-            <td style="width: 250px;"><input id="customer_name" value="Sam Cohen"
+            <td style="width: 250px;"><input id="customer_name" name="fullname"
                 style="width: 100%" autofocus="autofocus" /></td>
             <td style="padding-left: 30px;">SECTION:</td>
-            <td><input class="sm-field" id="section" value="314" /></td>
+            <td><input class="sm-field" id="section" name="section" /></td>
             <td>ROW:</td>
-            <td><input class="sm-field" id="row" value="2" /></td>
+            <td><input class="sm-field" id="row" name="row" /></td>
             <td>SEAT:</td>
-            <td><input class="sm-field" id="seat" value="5" /></td>
+            <td><input class="sm-field" id="seat" name="seat" /></td>
         </tr>
         <tr>
             <td>ORDER NUMBER:</td>
-            <td><input id="order_number" style="width: 100%" value="<?php echo $random_order_number; ?>" /></td>
+            <td><input id="order_number" style="width: 100%" value="<?php echo $random_order_number; ?>" name="order_number" /></td>
 
             <td>BARCODE:</td>
-            <td colspan="5"><input id="barcode" style="width: 100%" value="" /></td>
+            <td colspan="5"><input id="barcode" name="barcode"
+                style="width: 100%" value="" /></td>
         </tr>
 
         <tr>
             <td>ZIP_CODE:</td>
-            <td><input id="zip_code" style="width: 100%" value="<?php echo $random_zip_code; ?>" /></td>
+            <td><input id="zip_code" name="zip_code"
+                style="width: 100%" value="<?php echo $random_zip_code; ?>" /></td>
 
             <td>CREDIT CARD:</td>
-            <td colspan="5"><input id="cc_code" style="width: 100%" value="<?php echo $random_cc_code; ?>" /></td>
+            <td colspan="5"><input id="cc_code" name="cc_code"
+                style="width: 100%" value="<?php echo $random_cc_code; ?>" /></td>
         </tr>
 
         <tr>
             <td>EVENT ID:</td>
-            <td ><input id="event_id" style="width: 100%" value="<?php echo $random_event_id; ?>" /></td>
+            <td ><input id="event_id" name="event_id" style="width: 100%"
+                value="<?php echo $random_event_id; ?>" /></td>
 
             <td>EVENT DATE:</td>
-            <td colspan="3"><input id="event_date" style="width: 100%" value="wed june 14 2017" /></td>
+            <td colspan="3"><input id="event_date" name="event_date"
+                style="width: 100%" value="wed june 14 2017" /></td>
 
             <td>TIME:</td>
-            <td><input id="event_time" style="width: 100%" value="6:00PM" /></td>
+            <td><input id="event_time" name="event_time"
+                style="width: 100%" value="6:00PM" /></td>
         </tr>
 
         <tr>
             <td>VENUE:</td>
-            <td><input id="venue" style="width: 100%" value="ALAMODOME SA/TX" /></td>
+            <td><input id="venue" name="venue"
+                style="width: 100%" /></td>
 
             <td>Ticket Date:</td>
-            <td colspan="3"><input id="ticket_date" style="width: 100%" value="<?php echo $ticket_date; ?>" /></td>
+            <td colspan="3"><input id="ticket_date" name="ticket_date"
+                style="width: 100%" value="<?php echo $ticket_date; ?>" /></td>
             <td>SEAT NOTES:</td>
-            <td><input style="width: 100%" id="seat_notes" value="UPPER LEVEL" /></td>
+            <td><input style="width: 100%" id="seat_notes" name="seat_notes" /></td>
         </tr>
         <tr>
             <td>EVENT NAME:</td>
             <td>
-                <textarea id="event_name" rows="3" style="width: 100%;">99.5 KISS-FM PRESENTS
-METALLICA
-WWW.METALLICA.COM</textarea>
+                <textarea id="event_name" name="event_name"
+                    rows="3" style="width: 100%;"></textarea>
             </td>
 
             <td>Notes:</td>
             <td colspan="4">
-                <textarea id="notes" rows="3" style="width: 100%;">DOORS OPEN AT 4:00PM</textarea>
+                <textarea id="notes" name="notes"
+                    rows="3" style="width: 100%;"></textarea>
             </td>
         </tr>
     </table>
+    <div style="position: absolute; bottom: 3px; right: 10px;">
+        [<a href="javascript:exportCsv()">Export CSV Sample</a>]
+    </div>
 </div>
 
 <div id="ticket-preview" class="panel panel-default" style="display: block;">
@@ -138,12 +132,22 @@ WWW.METALLICA.COM</textarea>
 <script src="assets/js/app.js"></script>
 <script>
     function bindField(input_id, display_class) {
+        $('.' + display_class).css('min-width', '30px');
+
         $('#' + input_id).on('keyup mouseup', function (event, previousText) {
             var value = $(this).val().toUpperCase();
             value = value.replace(/\r\n|\r|\n/g,"<br />");
 
             $('.' + display_class).html(value);
             updatePdfComment();
+        });
+
+        $('#' + input_id).on('focus', function (event) {
+            $('.' + display_class).addClass('highlighted-field');
+        });
+
+        $('#' + input_id).on('blur', function (event) {
+            $('.highlighted-field').removeClass('highlighted-field');
         });
     }
 
@@ -169,7 +173,7 @@ WWW.METALLICA.COM</textarea>
     bindField('order_number',   'order_number_display');
     bindField('ticket_date',    'ticket_date_display');
     bindField('cc_code',        'cc_code_display');
-    bindField('zip_code',        'zip_code_display');
+    bindField('zip_code',       'zip_code_display');
 
     bindField('event_name',     'event_name_display');
     bindField('event_id',       'event_id_display');
@@ -231,6 +235,13 @@ WWW.METALLICA.COM</textarea>
             $('.generate-btn').attr("disabled", false);
         });
     });
+
+    function exportCsv() {
+        var form = $('form[name="ticketform"]');
+        form.attr('target', '_blank');
+        form.attr('action', 'lib/submit-export-csv.php');
+        form.submit();
+    }
 </script>
 
 <?php

@@ -1,12 +1,3 @@
-<?php
-    $pdf_width = 612;
-    $tix_first_row_top = 60;
-    $tix_body_top = 120;
-    $tix_body_lineheight = 1.4;
-    $tix_body_height = 116;
-    $barcode_height = 33;
-?>
-
 <style>
     .barcode-wrap {
         position: absolute;
@@ -89,11 +80,11 @@
     }
 </style>
 
-<div style="position: relative; width: <?php echo $pdf_width; ?>px; margin: 0 auto;">
+<div style="position: relative; width: 612px; margin: 0 auto;">
 
-    <img src='https://s3.amazonaws.com/tinkerbell-assets/tm-ticket-template-300p.png' style="width: <?php echo $pdf_width;?>px;"/>
+    <img src='https://s3.amazonaws.com/tinkerbell-assets/tm-ticket-template-300p.png' style="width: 612px;"/>
 
-    <div style="left: 52px; top: <?php echo $tix_first_row_top; ?>px;
+    <div style="left: 52px; top: 60px;
         position: absolute; min-width: 440px; max-width: 460px;">
         <div class="tix-label" style="float: left;">ISSUED TO</div>
         <div class="tix-text customer_name_display" style="float: left; margin-left: 12px;">[NAME]</div>
@@ -110,14 +101,14 @@
         <div class="tix-label" style="float: right; margin-right: 12px;">SECTION</div>
     </div>
 
-    <div style="left: 52px; top: <?php echo $tix_first_row_top + 20; ?>px; position: absolute;">
+    <div style="left: 52px; top: 80px; position: absolute;">
         <div class="tix-label" style="float: left;">ORDER NUMBER</div>
         <div class="tix-text order_number_display" style="float: left; margin-left: 5px;">[ORDER]</div>
     </div>
 
     <!-- bottom left -->
     <div class="tix-text tix-column" style="text-align: right; position: absolute;
-        right: 474px; top: <?php echo $tix_body_top; ?>px; line-height: <?php echo $tix_body_lineheight; ?>;">
+        right: 474px; top: 120px; line-height: 1.4;">
             <span class="event_id_display">[EVENT_ID]</span><br/>
             <br/>
             <br/>
@@ -132,7 +123,7 @@
 
     <!-- bottom mid col -->
     <div class="tix-text tix-column" style="text-align: left; position: absolute;
-        left: 152px; top: <?php echo $tix_body_top; ?>px; line-height: <?php echo $tix_body_lineheight; ?>;">
+        left: 152px; top: 120px; line-height: 1.4;">
             <div style="max-width: 230px;">
                 <span class="section_display">[SECT]</span>
                 <span class="row_display">[ROW]</span>
@@ -150,7 +141,7 @@
 
     <!-- bottom right col -->
     <div class="tix-text tix-column" style="text-align: left; position: absolute;
-        left: 410px; top: <?php echo $tix_body_top; ?>px; line-height: <?php echo $tix_body_lineheight; ?>;">
+        left: 410px; top: 120px; line-height: 1.4;">
             E<span class="event_id_display">[EVENT_ID]</span><br/>
             <br/>
             CN 42132<br/>
@@ -164,7 +155,7 @@
     <div id="barcode-wrap1" class="barcode-wrap rotate-90"
         style="right: 78px; top: 60px; width: 175px;">
 
-        <img id="barcode_img" style="max-width: 100%; height: 33px;" alt="barcode" />
+        <img id="barcode_img" style="max-width: 100%; height: 30px;" alt="barcode" src="[BARCODE_SRC]" />
             <br/>
         <span class="barcode_display">[BARCODE]</span>
     </div>
@@ -176,7 +167,7 @@
     </div>
 </div>
 
-<table style="width: <?php echo $pdf_width; ?>px; margin: 10px auto; position: relative;">
+<table style="width: 612px; margin: 10px auto; position: relative;">
     <tr>
         <td style="padding-right: 10px; width: 50%;">
             <img src="https://s3.amazonaws.com/tinkerbell-assets/tm-promo-verified-tickets.png" style="width: 100%;">
@@ -193,7 +184,7 @@
 
                 <img src="https://s3.amazonaws.com/tinkerbell-assets/tm-thankyou-ticketfast.png" style="width: 100%; margin-top: 5px;">
 
-                <div id="pdf_comment" style="color: #fff; position: absolute;">
+                <div id="pdf_comment" style="color: #fff; position: absolute; width: 612px; text-align: left; overflow-wrap: break-word;">
                 </div>
             </div>
         </td>
@@ -220,7 +211,7 @@
                 <div class="barcode-wrap"
                     style="top: -87px; width: 296px;">
 
-                    <img id="barcode_img2" style="margin: 0 auto;" alt="barcode" />
+                    <img id="barcode_img2" style="margin: 0 auto; max-width: 200px;" alt="barcode" src="[BARCODE_SRC]" />
                         <br/>
                     <span class="barcode_display">[BARCODE]</span>
                 </div>

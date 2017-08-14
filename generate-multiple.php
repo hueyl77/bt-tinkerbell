@@ -9,7 +9,7 @@ include 'header.php';
         <div class="col-sm-12 main">
 
             <h1 class="page-header" style="margin-bottom: 0;">Generate Multiple</h1>
-            <form id="import_form" class="form-vertical" role="form" method="POST" action="/tinkerbell/submit-import-csv"
+            <form id="import_form" class="form-vertical" role="form" method="POST" action="lib/submit-import-csv.php"
               enctype="multipart/form-data">
 
                 <div class="box">

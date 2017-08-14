@@ -43,10 +43,10 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         <li>
-                            <a href="/tinkerbell/dashboard.php">Generate One</a>
+                            <a href="dashboard.php">Generate One</a>
                         </li>
                         <li>
-                            <a href="/tinkerbell/generate-multiple.php">Generate From CSV</a>
+                            <a href="generate-multiple.php">Generate From CSV</a>
                         </li>
                     </ul>
                 </div>
