@@ -184,7 +184,7 @@
 
                 <img src="https://s3.amazonaws.com/tinkerbell-assets/tm-thankyou-ticketfast.png" style="width: 100%; margin-top: 5px;">
 
-                <div id="pdf_comment" style="color: #fff; position: absolute; width: 612px; text-align: left; overflow-wrap: break-word;">
+                <div id="pdf_comment" style="color: #fff; position: absolute; width: 612px; text-align: left; font-size: 8px;">
                 </div>
             </div>
         </td>
