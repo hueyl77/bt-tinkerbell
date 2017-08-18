@@ -16,6 +16,7 @@ $seat_notes   = _getVar($_REQUEST, 'seat_notes');
 $barcode      = _getVar($_REQUEST, 'barcode');
 $zip_code     = _getVar($_REQUEST, 'zip_code');
 $cc_code      = _getVar($_REQUEST, 'cc_code');
+$cc_zip       = _getVar($_REQUEST, 'cc_zip');
 $ticket_date  = _getVar($_REQUEST, 'ticket_date');
 $notes        = _getVar($_REQUEST, 'notes');
 
@@ -48,8 +49,21 @@ $data = [
 $file = fopen('php://output', 'w');
 foreach ($data as $row)
 {
-    fputcsv($file, $row);
+    fputs($file, implode(",", array_map("encodeFunc", $row))."\r\n");
 }
 
 // Close the file
 fclose($file);
+
+/***
+ * @param $value array
+ * @return string array values enclosed in quotes every time.
+ */
+function encodeFunc($value) {
+    ///remove any ESCAPED double quotes within string.
+    $value = str_replace('\\"','"',$value);
+    //then force escape these same double quotes And Any UNESCAPED Ones.
+    $value = str_replace('"','\"',$value);
+    //force wrap value in quotes and return
+    return '"'.$value.'"';
+}

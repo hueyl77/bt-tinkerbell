@@ -114,9 +114,8 @@
             <br/>
             <span class="section_display">[SECT]</span><br/>
             <span class="cc_code_display">[CC_CODE]</span><br/>
-            <span class="row_display">[ROW]</span>
-            &nbsp;&nbsp;
-            <span class="seat_display">[SEAT]</span><br/>
+            <span class="row_display" style="display: inline-block;">[ROW]</span>
+            <span class="seat_display" style="display: inline-block;">[SEAT]</span><br/>
             <span class="zip_code_display">[ZIP_CODE]</span><br/>
             <span class="ticket_date_display">[TICKET_DATE]</span>
     </div>
@@ -146,9 +145,9 @@
             <br/>
             CN 42132<br/>
             <span class="section_display">[SECT]</span><br/>
-            <br/>
+            <span class="cc_zip_display">[CC_ZIP]</span><br/>
             <span class="row_display">[ROW]</span><br/>
-            <br/>
+            <span>A</span><br/>
             <span class="seat_display">[SEAT]</span>
     </div>
 

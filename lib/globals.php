@@ -137,11 +137,13 @@ function renderTmTemplate($html, $data, $indexes)
     $ticket_date        = $data[$indexes['ticket_date']] or getTicketDate();
     $cc_code            = $data[$indexes['cc_code']] or generateCcCode();
     $zip_code           = $data[$indexes['zip_code']] or generateZipCode();
+    $cc_zip             = $data[$indexes['cc_zip']]  or generateCcZip('VI');
 
     $html = str_replace('[ORDER]',          $order_number, $html);
     $html = str_replace('[TICKET_DATE]',    $ticket_date, $html);
     $html = str_replace('[CC_CODE]',        $cc_code, $html);
     $html = str_replace('[ZIP_CODE]',       $zip_code, $html);
+    $html = str_replace('[CC_ZIP]',         $cc_zip, $html);
 
     // pdfcomment
     $pdf_comment = 'PDFCOMMENT{"source":"ticketfire",' .
@@ -220,6 +222,10 @@ function getTicketDate()
 function generateCcCode()
 {
     return "VI " . rand(1, 399) . "X";
+}
+function generateCcZip($cc_chars = 'VI')
+{
+    return $cc_chars . rand(100, 499) . "ZIP";
 }
 
 function generateZipCode()

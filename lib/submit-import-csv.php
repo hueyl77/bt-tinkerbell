@@ -7,9 +7,9 @@ if (!$csv_file || count($csv_file) == 0) {
   die("invalid csv file");
 }
 
-if ($csv_file['type'] != 'text/csv') {
+/*if ($csv_file['type'] != 'text/csv') {
   die("Invalid file type.  Please select a text/csv file.");
-}
+}*/
 
 $directory_path = storage_path("csvs");
 $filename = $csv_file['name'];

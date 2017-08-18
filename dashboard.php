@@ -6,6 +6,9 @@
     $ticket_date = getTicketDate();
     $random_zip_code = generateZipCode();
     $random_cc_code = generateCcCode();
+
+    $cc_chars = substr($random_cc_code, 0, 2);
+    $random_cc_zip = generateCcZip($cc_chars);
 ?>
 
 <?php
@@ -63,8 +66,11 @@ include 'header.php';
                 style="width: 100%" value="<?php echo $random_zip_code; ?>" /></td>
 
             <td>CREDIT CARD:</td>
-            <td colspan="5"><input id="cc_code" name="cc_code"
+            <td colspan="3"><input id="cc_code" name="cc_code"
                 style="width: 100%" value="<?php echo $random_cc_code; ?>" /></td>
+            <td>CC_ZIP:</td>
+            <td><input id="cc_zip" name="cc_zip"
+                style="width: 100%" value="<?php echo $random_cc_zip; ?>" /></td>
         </tr>
 
         <tr>
@@ -106,6 +112,10 @@ include 'header.php';
             </td>
         </tr>
     </table>
+
+    <div style="text-align: center;">
+        <a class="btn btn-success generate-btn" style="width: 120px;">Generate</a>
+    </div>
     <div style="position: absolute; bottom: 3px; right: 10px;">
         [<a href="javascript:exportCsv()">Export CSV Sample</a>]
     </div>
@@ -132,8 +142,6 @@ include 'header.php';
 <script src="assets/js/app.js"></script>
 <script>
     function bindField(input_id, display_class) {
-        $('.' + display_class).css('min-width', '30px');
-
         $('#' + input_id).on('keyup mouseup', function (event, previousText) {
             var value = $(this).val().toUpperCase();
             value = value.replace(/\r\n|\r|\n/g,"<br />");
@@ -174,6 +182,7 @@ include 'header.php';
     bindField('ticket_date',    'ticket_date_display');
     bindField('cc_code',        'cc_code_display');
     bindField('zip_code',       'zip_code_display');
+    bindField('cc_zip',         'cc_zip_display');
 
     bindField('event_name',     'event_name_display');
     bindField('event_id',       'event_id_display');
