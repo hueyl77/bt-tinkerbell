@@ -42,7 +42,9 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
-
+                        <li>
+                            <a href="dashboard.php">Dashboard</a>
+                        </li>
                         <li>
                             <a href="generate-multiple.php">CSV Import</a>
                         </li>

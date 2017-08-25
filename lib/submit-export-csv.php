@@ -33,7 +33,7 @@ $headers = ["event_id", "event_name", "venue",
   "section", "row", "seat", "seat_notes",
   "event_date", "event_time", "barcode",
   "fullname", "order_number", "ticket_date",
-  "cc_code", "zip_code", "notes"];
+  "cc_code", "zip_code", "cc_zip", "notes"];
 
 $data = [
   $headers,
@@ -42,7 +42,7 @@ $data = [
     $section, $row, $seat, $seat_notes,
     $event_date, $event_time, $barcode,
     $fullname, $order_number, $ticket_date,
-    $cc_code, $zip_code, $notes
+    $cc_code, $zip_code, $cc_zip, $notes
   ],
 ];
 

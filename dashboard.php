@@ -9,6 +9,8 @@
 
     $cc_chars = substr($random_cc_code, 0, 2);
     $random_cc_zip = generateCcZip($cc_chars);
+
+    $storage_url = getenv('STORAGE_URL');
 ?>
 
 <?php
@@ -200,7 +202,7 @@ include 'header.php';
 
         $.post('lib/generate-barcode.php', data, function(response){
 
-            var new_src = "data:image/png;base64, " + response;
+            var new_src = "<?php echo $storage_url ?>barcodes/" + barcode_val + ".jpg";
 
             $('#barcode_img').attr('src', new_src);
             $('#barcode_img2').attr('src', new_src);

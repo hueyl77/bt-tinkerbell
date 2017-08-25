@@ -129,7 +129,8 @@ function renderTmTemplate($html, $data, $indexes)
 
     // barcode
     $barcode_content = generateBarcode($barcode);
-    $barcode_src = "data:image/png;base64, " . $barcode_content;
+    $storage_url = getenv('STORAGE_URL');
+    $barcode_src = $storage_url . "barcodes/" . $barcode . ".jpg";
     $html = str_replace('[BARCODE_SRC]', $barcode_src, $html);
 
     // optional params with generated random defaults
@@ -204,6 +205,7 @@ function generateBarcode($barcode, $bar_width = 2, $bar_height = 30)
 {
     $barcode = preg_replace('/\s+/', '', $barcode);
     $output = DNS1D::getBarcodePNG($barcode, "I25", $bar_width, $bar_height);
+    //$output = DNS1D::getBarcodeHTML($barcode, "I25", $bar_width, $bar_height);
 
     return $output;
 }
