@@ -8,9 +8,15 @@
         color: black;
     }
 
-    .barcode-wrap img {
+    .barcode_img {
         border-top: 3px solid #000;
         border-bottom: 3px solid #000;
+    }
+
+    .barcode-img-wrap {
+        border-top: 3px solid #000;
+        border-bottom: 3px solid #000;
+        padding-left: 1px;
     }
 
     .rotate-90 {
@@ -154,8 +160,8 @@
     <div id="barcode-wrap1" class="barcode-wrap rotate-90"
         style="right: 78px; top: 60px; width: 175px;">
 
-        <img id="barcode_img" style="max-width: 100%; height: 30px;" alt="barcode" src="[BARCODE_SRC]" />
-            <br/>
+        <img id="barcode_img" class="barcode_img" style="width: 100%; height: 32px" alt="barcode" src="[BARCODE_SRC]" />
+        <br>
         <span class="barcode_display">[BARCODE]</span>
     </div>
 
@@ -207,9 +213,9 @@
                 </div>
 
                 <div class="barcode-wrap"
-                    style="top: -87px; width: 296px;">
+                    style="top: -87px; width: 300px;">
 
-                    <img id="barcode_img2" style="margin: 0 auto; max-width: 200px;" alt="barcode" src="[BARCODE_SRC]" />
+                    <img id="barcode_img2" class="barcode_img" style="margin: 0 auto; max-width: 200px;" alt="barcode" src="[BARCODE_SRC]" />
                         <br/>
                     <span class="barcode_display">[BARCODE]</span>
                 </div>

@@ -204,8 +204,20 @@ function randomNumber($digits) {
 function generateBarcode($barcode, $bar_width = 2, $bar_height = 30)
 {
     $barcode = preg_replace('/\s+/', '', $barcode);
-    $output = DNS1D::getBarcodePNG($barcode, "I25", $bar_width, $bar_height);
+    $output = DNS1D::getBarcodePNG($barcode, "I25");
     //$output = DNS1D::getBarcodeHTML($barcode, "I25", $bar_width, $bar_height);
+
+    // save jpg image
+    $data = 'data:image/png;base64,' . $output;
+
+    list($type, $data) = explode(';', $data);
+    list(, $data)      = explode(',', $data);
+    $data = base64_decode($data);
+
+    file_put_contents(storage_path("barcodes/$barcode.png"), $data);
+
+    $image = imagecreatefrompng(storage_path("barcodes/$barcode.png"));
+    imagejpeg($image, storage_path("barcodes/$barcode.jpg"), 100);
 
     return $output;
 }
