@@ -41,6 +41,10 @@ for($i=1; $i<=$max_num_seatrows; $i++) {
     $seat = $seats[$i];
     $barcode = $barcodes[$i];
 
+    $section = strtoupper($section);
+    $row = strtoupper($row);
+    $seat = strtoupper($seat);
+
     $html = str_replace('[NAME]',           $fullname, $html);
     $html = str_replace('[EVENT_ID]',       $event_id, $html);
     $html = str_replace('[EVENT_NAME]',     $event_name, $html);

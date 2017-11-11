@@ -11,6 +11,7 @@
     $random_cc_zip = generateCcZip($cc_chars);
 
     $storage_url = getenv('STORAGE_URL');
+    $max_num_seats = 9;
 ?>
 
 <?php
@@ -26,6 +27,15 @@ include 'header.php';
         border: 2px dashed red;
     }
 
+    .ticket-info-tbl label,
+    .ticket-info-tbl  input {
+        margin-right: 12px;
+    }
+
+    .add-seat-icon {
+        cursor: pointer;
+    }
+
     @media (max-width: 768px) {
         .ticket-info-tbl td {
             display: block;
@@ -38,77 +48,99 @@ include 'header.php';
         <div class="col-sm-12 main">
 
 <h1 class="page-header" style="margin-bottom: 0;">Generate One</h1>
-<form name="ticketform" class="form-vertical" role="form" method="POST" action="#">
+<form name="ticketform" class="form-vertical" role="form" method="POST" action="lib/dashboard-multiple-submit.php">
 
 <div class="well well-lg" style="position: relative;">
     <table class="table ticket-info-tbl">
         <tr>
-            <td>NAME:</td>
-            <td style="width: 250px;"><input id="customer_name" name="fullname"
-                style="width: 100%" autofocus="autofocus" /></td>
-            <td style="padding-left: 30px;">SECTION:</td>
-            <td><input class="sm-field" id="section" name="section" /></td>
-            <td>ROW:</td>
-            <td><input class="sm-field" id="row" name="row" /></td>
-            <td>SEAT:</td>
-            <td><input class="sm-field" id="seat1" name="seat1" /></td>
-        </tr>
-        <tr>
-            <td>ORDER NUMBER:</td>
-            <td><input id="order_number" style="width: 100%" value="<?php echo $random_order_number; ?>" name="order_number" /></td>
-
-            <td>BARCODE:</td>
-            <td colspan="5"><input id="barcode1" name="barcode1"
-                style="width: 100%" value="" /></td>
-        </tr>
-
-        <tr>
-            <td>ZIP_CODE:</td>
-            <td><input id="zip_code" name="zip_code"
-                style="width: 100%" value="<?php echo $random_zip_code; ?>" /></td>
-
-            <td>CREDIT CARD:</td>
-            <td colspan="3"><input id="cc_code" name="cc_code"
-                style="width: 100%" value="<?php echo $random_cc_code; ?>" /></td>
-            <td>CC_ZIP:</td>
-            <td><input id="cc_zip" name="cc_zip"
-                style="width: 100%" value="<?php echo $random_cc_zip; ?>" /></td>
-        </tr>
-
-        <tr>
-            <td>EVENT ID:</td>
-            <td ><input id="event_id" name="event_id" style="width: 100%"
-                value="<?php echo $random_event_id; ?>" /></td>
-
-            <td>EVENT DATE:</td>
-            <td colspan="3"><input id="event_date" name="event_date"
-                style="width: 100%" value="wed june 14 2017" /></td>
-
-            <td>TIME:</td>
-            <td><input id="event_time" name="event_time"
-                style="width: 100%" value="6:00PM" /></td>
-        </tr>
-
-        <tr>
-            <td>VENUE:</td>
-            <td><input id="venue" name="venue"
-                style="width: 100%" /></td>
-
-            <td>Ticket Date:</td>
-            <td colspan="3"><input id="ticket_date" name="ticket_date"
-                style="width: 100%" value="<?php echo $ticket_date; ?>" /></td>
-            <td>SEAT NOTES:</td>
-            <td><input style="width: 100%" id="seat_notes" name="seat_notes" /></td>
-        </tr>
-        <tr>
-            <td>EVENT NAME:</td>
             <td>
+                <label>NAME:</label>
+                <input id="customer_name" name="fullname" autofocus="autofocus" />
+            </td>
+            <td>
+                <label>ORDER NUMBER:</label>
+                <input id="order_number" value="<?php echo $random_order_number; ?>" name="order_number" />
+            </td>
+        </tr>
+
+
+        <!-- seats / barcodes rows -->
+        <?php for($i=1; $i<=$max_num_seats;$i++):?>
+        <tr id="more-seats-row<?php echo $i;?>" <?php if ($i > 1): ?> style="display: none;" <?php endif;?>>
+
+            <?php if ($i == 1): ?>
+                <td>
+                    <label>SECTION:</label>
+                    <input class="sm-field" id="section" name="section" />
+                    <label>ROW:</label>
+                    <input class="sm-field" id="row" name="row" />
+                </td>
+            <?php else: ?>
+                <td></td>
+            <?php endif; ?>
+            <td>
+                <label>SEAT <?php echo $i;?>:</label>
+                <input class="sm-field" id="seat<?php echo $i;?>" name="seat<?php echo $i;?>" />
+                <label>BARCODE <?php echo $i;?>:</label>
+                <input id="barcode<?php echo $i;?>" name="barcode<?php echo $i;?>" value="" />
+                <?php if ($i <= $max_num_seats - 1): ?>
+                    <i class="fa fa-plus add-seat-icon"></i>
+                <?php endif; ?>
+            </td>
+        </tr>
+        <?php endfor;?>
+        <!-- end seats / barcodes rows -->
+
+        <tr>
+            <td>
+                <label>ZIP_CODE:</label>
+                <input id="zip_code" name="zip_code" value="<?php echo $random_zip_code; ?>" />
+            </td>
+            <td>
+                <label>CREDIT CARD:</label>
+                <input id="cc_code" name="cc_code" value="<?php echo $random_cc_code; ?>" />
+
+                <label>CC_ZIP:</label>
+                <input id="cc_zip" name="cc_zip" value="<?php echo $random_cc_zip; ?>" />
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label>EVENT ID:</label>
+                <input id="event_id" name="event_id"
+                value="<?php echo $random_event_id; ?>" />
+            </td>
+
+            <td>
+                <label>EVENT DATE:</label>
+                <input id="event_date" name="event_date" value="wed june 14 2017" />
+                <label>TIME:</label>
+                <input id="event_time" name="event_time" value="6:00PM" />
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label>VENUE:
+                <input id="venue" name="venue" />
+            </td>
+            <td>
+                <label>Ticket Date:</label>
+                <input id="ticket_date" name="ticket_date" value="<?php echo $ticket_date; ?>" />
+                <label>SEAT NOTES:</label>
+                <input id="seat_notes" name="seat_notes" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>EVENT NAME:</label><br/>
                 <textarea id="event_name" name="event_name"
                     rows="3" style="width: 100%;"></textarea>
             </td>
 
-            <td>Notes:</td>
-            <td colspan="4">
+            <td>
+                <label>Notes:</label><br/>
                 <textarea id="notes" name="notes"
                     rows="3" style="width: 100%;"></textarea>
             </td>
@@ -222,29 +254,19 @@ include 'header.php';
     });
 
     $('.generate-btn').click(function(){
-        var html_content = $('#ticket-preview .panel-body').html();
-        var data = {
-          event_id: $('#event_id').val(),
-          event_name: $('#event_name').val(),
-          section: $('#section').val(),
-          row: $('#row').val(),
-          seat: $('#seat1').val(),
-          pdf_content: html_content
-        };
+        var form = $('form[name="ticketform"]');
+        form.attr('action', 'lib/submit-dashboard-multiple.php');
+        form.submit();
+    });
 
-        updatePdfComment();
-
-        $(this).attr("disabled",true);
-        $(this).html("Working...");
-
-        /*var w = window.open();
-        $(w.document.body).html(html_content);*/
-        $.post('lib/submit-generate-one.php', data, function(response){
-            window.open("lib/view-tm-ticket.php?filename=" + response);
-
-            $('.generate-btn').html("Generate");
-            $('.generate-btn').attr("disabled", false);
-        });
+    var current_seat_rows = 1;
+    $('.add-seat-icon').click(function() {
+        current_seat_rows++;
+        if (current_seat_rows <= <?php echo $max_num_seats;?>) {
+            $('.add-seat-icon').hide();
+            $('#more-seats-row' + current_seat_rows).show();
+            $('#more-seats-row' + current_seat_rows).find('.add-seat-icon').show();
+        }
     });
 
     function exportCsv() {
