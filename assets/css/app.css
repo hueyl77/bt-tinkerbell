@@ -1,15 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic);@import url(//hello.myfonts.net/count/33d6ea);@charset "UTF-8";
 
-
-
-
-
-@font-face {
-  font-family: 'Mang-Bold';
-  src: url(/fonts/33D6EA_0_0.eot?811e3a9a9d1861caa94e2f752de6ee53);
-  src: url(/fonts/33D6EA_0_0.eot?811e3a9a9d1861caa94e2f752de6ee53) format("embedded-opentype"), url(/fonts/33D6EA_0_0.woff2?1957e4f9a1b19ec40e073450bd89f2f5) format("woff2"), url(/fonts/33D6EA_0_0.woff?2c27414f260c4d397835d69d7c6ea03c) format("woff"), url(/fonts/33D6EA_0_0.ttf?2b184735957843de4405eec13eece973) format("truetype");
-}
-
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2016 Twitter, Inc.
@@ -8318,12 +8308,6 @@ body {
 h1 {
   margin: 0;
   font-size: 28px;
-}
-
-.Mang-Bold {
-  font-family: Mang-Bold;
-  font-weight: normal;
-  font-style: normal;
 }
 
 .header {
